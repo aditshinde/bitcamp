@@ -1,8 +1,162 @@
-body {
-  padding: 50px;
-  font: 14px "Lucida Grande", Helvetica, Arial, sans-serif;
+/********* Icons ************/
+.person_name,.phone,.course,.batch,.serial_no,.email,.lock,.unlock,.file,.id,.graduation,.go_back,.right-arrow,.fab_add,.fab_cross,.save,.download,.online,.offline,.sem,.desc,.problem_st,.numbers,.sample_in,.sample_out,.input_format,.output_format,.score,.passed,.failed,.not_allowed{
+	background-size: 2rem 2rem;
+    background-repeat: no-repeat;
+}
+.person_name{
+	background-image: url(../icons/name.png);
+}
+.phone{
+	background-image: url(../icons/phone.png);
+}
+.course{
+	background-image: url(../icons/course.png);
+}
+.batch{
+	background-image: url(../icons/batch.png);
+}
+.serial_no{
+	background-image: url(../icons/serial_no.png);
+}
+.email{
+	background-image: url(../icons/email.png);
+}	
+.lock{
+	background-image: url(../icons/lock.png);
+}
+.unlock{
+	background-image: url(../icons/unlock2.png);
+}
+.file{
+	background-image: url(../icons/file.png);
+}
+.id{
+	background-image: url(../icons/id.png);
+}
+.graduation{
+	background-image: url(../icons/graduation.png);
+}
+.go_back{
+	background-image: url(../icons/go_back.png);
+}
+.right-arrow{
+	background-image: url(../icons/right-arrow.png);
+}
+.fab_add{
+	background-image: url(../icons/plus.png);
+}
+.fab_cross{
+	background-image: url(../icons/fab_cross.png);
+}
+.save{
+	background-image: url(../icons/save.png);
+}
+.download{
+	background-image: url(../icons/download4.png);
+}
+.online{
+	background-image: url(../icons/online.png);
+}
+.offline{
+	background-image: url(../icons/offline.png);
+}
+.sem{
+	background-image: url(../icons/sem.png);
+}
+.input_format{
+	background-image: url(../icons/input_format.png);
+}
+.output_format{
+	background-image: url(../icons/output_format.png);
+}
+.sample_in{
+	background-image: url(../icons/sample_in.png);
+}
+.sample_out{
+	background-image: url(../icons/sample_out.png);
+}
+.numbers{
+	background-image: url(../icons/numbers.png);
+}
+.problem_st{
+	background-image: url(../icons/problem_st.png);
+}
+.desc{
+	background-image: url(../icons/desc.png);
+}
+.score{
+	background-image: url(../icons/score.png);
+}
+.passed{
+	background-image: url(../icons/passed.png);
+}
+.failed{
+	background-image: url(../icons/failed.png);
+}
+.not_allowed{
+	background-image: url(../icons/not_allowed.png);
+}
+/************** Home page ******************/
+.full_screen{
+	background-image: url('../images/codebotbg32.jpg');
+	
+}
+.background-layer{
+	background-image: url('../images/cbb.png'); /*#273245*/
+	background-size: cover;
+
+}
+#home_login{
+	background-color: rgba(0, 128, 0, 0);
+    margin-top: 15%;
+    border-top: 300px solid rgba(255, 0, 0, 0);
+    border-right: 1295px solid rgba(7, 15, 23, 0.88);
+    margin-bottom: 0px;
+}
+#home_login2{
+	height: 150px;
+	width: 1267px;
+}
+.wd85{
+	width: 85%;
+}
+.blue-black{
+	background-color: rgb(27, 32, 45) !important;
+}
+.blue-black-text{
+	color: rgb(27, 32, 45) !important;
+}
+.blue-black-border{
+	border-bottom: 1px solid #18222e !important;
 }
 
-a {
-  color: #00B7FF;
+.blue-black-light{
+	background-color: rgb(27,32,90) !important;
+}
+.blue-black-my1{
+    background-color:#2c3346 !important;
+}
+.blue-black-my1-text{
+    color: #4e5c82 !important;
+}
+.typed-cursor{
+    opacity: 1;
+    -webkit-animation: blink 0.7s infinite;
+    -moz-animation: blink 0.7s infinite;
+    animation: blink 0.7s infinite;
+}
+@keyframes blink{
+    0% { opacity:1; }
+    50% { opacity:0; }
+    100% { opacity:1; }
+}
+@-webkit-keyframes blink{
+    0% { opacity:1; }
+    50% { opacity:0; }
+    100% { opacity:1; }
+}
+@-moz-keyframes blink{
+    0% { opacity:1; }
+    50% { opacity:0; }
+    100% { opacity:1; }
 }
