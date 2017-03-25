@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <title>Doctor home page</title>
+    <title>Patient home page</title>
     <% include materialize.html %>
     <link rel='stylesheet' href='../stylesheets/style.css' />
     <style type="text/css" media="screen">
@@ -119,47 +119,72 @@
 
              <div style="margin:0px 290px;">
                 <div class="row">
-                  <div class="card horizontal col l3 m6 s12 green">
-                    <div class="valign-wrapper"><div class="card-image">
-                      <!-- <img src="../../images/sch1.png"> -->
-                      <i class="sch1 prefix" style="font-size: 2.8rem;background-size: 60px;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</i>
-                    </div>
-                    </div>
-                    <div class="card-stacked">
-                      <div class="card-content white-text">
-                        <span class="card-title">Scheduled Appointments</span>
-                      </div>
-                    </div>
-                  </div>
+                  <p><b>DEVICE STATISTICS</b></p>
+                </div>
+                <div class="row">
                   <div class="col l3 m6 s12">
-                      <a href="/doctor/sch_appointments">
-                      <div class="card yellow darken-3">
-                          <div class="card-content white-text">
-                            <span class="card-title">Scheduled Appointments</span>
-                          </div>
+                      <div class="card center-align">
+                        <div class="card-content green-text darken-4">
+                                <span class="card-title">Body Temperature</span>
+                                <hr/>
+                                <h3 id="body_temp">0</h3>
+                              </div>
                       </div>
-                      </a>
-                  </div>
-                  <div class="col l3 m6 s12">
-                      <a href="/doctor/pen_appointments">
-                      <div class="card green">
-                          <div class="card-content white-text">
-                            <span class="card-title">Pending appointments</span>
-                          </div>
-                          
+                 </div>
+                   <div class="col l3 m6 s12">
+                      <div class="card center-align">
+                        <div class="card-content green-text darken-4">
+                                <span class="card-title">Heart Rate<br/></span>
+                                <hr/>
+                                <h3 id="heart_rate">0</h3>
+                              </div>
                       </div>
-                    </a>
-                  </div>
-            
-        </div>
+                 </div>
+                   <div class="col l3 m6 s12">
+                      <div class="card center-align">
+                        <div class="card-content green-text darken-4">
+                                <span class="card-title">Pulse rate</span>
+                                <hr/>
+                                <h3 id="pulse_rate">0</h3>
+                              </div>
+                      </div>
+                 </div>
+                   <div class="col l3 m6 s12">
+                      <div class="card center-align">
+                        <div class="card-content green-text darken-4">
+                                <span class="card-title">No. of hours slept</span>
+                                <hr/>
+                                <h3 id="hours_slept">0</h3>
+                              </div>
+                      </div>
+                 </div>
+                   <div class="col l3 m6 s12">
+                      <div class="card center-align">
+                        <div class="card-content green-text darken-4">
+                                <span class="card-title">Blood pressure</span>
+                                <hr/>
+                                <h3 id="blood_pressure">0</h3>
+                              </div>
+                      </div>
+                 </div>
+                 
+                </div>                
       </div>
 
   </body>
 <script>
-  
-  $(document).ready(function(){
-    
-  });
-  $('.carousel.carousel-slider').carousel({full_width: true});
+      function randomInt(){
+        
+        randomInt();
+      }
+      $(document).ready(function(){
+        while(true){
+          var min = 100;
+          var max = 50;
+          var ran = Math.random();
+          $("#blood_pressure").html(Math.floor(ran * (max - min)) + min);
+          sleep(10);
+        }
+      });
 </script>
 </html>
