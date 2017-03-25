@@ -28,7 +28,7 @@ exports.find = function(callback){
 }
 
 exports.findById = function(data,callback){
-	Appoint.find({email : data},function(err,appoint){
+	Appoint.find({_id : data},function(err,appoint){
 		if(err){
 			console.log("Error:");
 			console.log(err);
@@ -84,6 +84,19 @@ exports.acceptPatient = function(id,flag,callback){
 }
 
 exports.rejectPatient = function(id,flag,callback){
+	Appoint.update({_id : id},{$set : {status:flag}},function(err,data){
+		if(err){
+			console.log(err);
+			callback(err,null);
+			}
+		else{
+			console.log('Rejected');
+			callback(null,data);
+		}
+	});
+}
+
+exports.donePatient = function(id,flag,callback){
 	Appoint.update({_id : id},{$set : {status:flag}},function(err,data){
 		if(err){
 			console.log(err);

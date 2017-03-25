@@ -132,7 +132,9 @@
               </div> -->
               <ul class="collapsible popout" data-collapsible="accordion">
                 <%for(var i=0;i<app.length;i++){%>
+
                 <li>
+                
                   <div class="collapsible-header pen_apt_title">  
                     <%=i+1%>. <%=app[i].fname%>&nbsp;<%=app[i].lname%>
                   </div>
@@ -153,7 +155,7 @@
                       <b>Time</b> </br><%=app[i].time%>
                     </span>
                     <span class="pen_apt_details">
-                          <a href="#" class="waves-effect waves-light btn">Done</a>   
+                          <a href="#" did="<%= user._id %>" pid="<%=app[i].pid%>" aid="<%=app[i]._id%>" class="presc waves-effect waves-light btn">Done</a>   
                     </span>
                   </div>
                 </li>
@@ -161,6 +163,21 @@
                 
               </ul>
             </div>
+            <!-- Modal Structure -->
+                <div id="modal1" class="modal">
+                  <div class="modal-content">
+                    <h5>
+                        Prescription: <span id="subm_file_nm" style="font-style:italic;color: #6d6d6d;"></span>
+                    </h5>
+
+                    <pre>
+                        <div id="modal_content" class="row">
+                            
+                        </div>
+                    </pre>
+
+                  </div>
+                </div>
 
         </div>
   </body>
@@ -169,8 +186,32 @@
 <script>
   
   $(document).ready(function(){
-    
+    if(alert1)
+    {
+      Materialize.toast(alert1, 4000)
+    }
   });
+            //init the modal
+            $('.modal-trigger').leanModal();
+
+            function openModal1(code,file) {
+                  //simulate ajax call to get the modal content
+                  $('#modal_content').html(code);
+                  $('#subm_file_nm').html(file);
+                  $('#save').attr('file', file);    //Used for setting downloaded file name
+                  //init the tabs
+                  $('ul.tabs').tabs();
+                  //open the modal
+                  $('#modal1').openModal();
+            }
+        $('.presc').click(function(){
+            var pid = $(this).attr('pid');
+            var did = $(this).attr('did');
+            var aid = $(this).attr('aid');
+            var form1 = '<form name="form" action="/doctor/sch_appointments/presc?aid='+aid+'" method="post"><div class="input-field col l6 m6 s12"><input type="text" id="disease" name="disease" class="validate" required="true"><label for="disease">Disease</label></div><div class="input-field col l6 m6 s12"><input type="text" id="prescription" name="prescription" class="validate" required="true"><label for="prescription">Prescription</label></div><div class="input-field col l6 m6 s12"><input type="number" id="bill" name="bill" class="validate" required="true"><label for="bill">Bill</label><div class="row"><div class="input-field col l6 m6 s12"><button class="waves-effect waves-light btn blue-black darken-4" type="submit" name="add">Submit</button></div></div></div><input type="hidden" name="did" id="did" value='+did+'><input type="hidden" name="pid" id="pid" value='+pid+'></form>  ';
+            openModal1(form1,pid);        
+        });
+
   $('.carousel.carousel-slider').carousel({full_width: true});
 </script>
 </html>

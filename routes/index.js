@@ -5,6 +5,7 @@ var emailjs       = require("emailjs");
 var doctor       = require('../model/docDAO');
 var patient       = require('../model/patDAO');
 var appoint = require('../model/appDAO');
+var patient_history = require('../model/patient_historyDAO');
 
 /**----------------------------------------------------------------------------------**/
 /* GET home page. */
@@ -78,7 +79,7 @@ router.post('/verify', function (req, res, next) {
 
 
 router.get('/doctor', function(req, res, next) {
-res.render('./doctor/index', { title: 'Home' });
+res.render('./doctor/index', { title: 'Home'});
 });
 
 router.get('/doctor/profile', function(req, res, next) {
@@ -98,7 +99,7 @@ router.get('/doctor/sch_appointments', function(req, res, next) {
           res.redirect('/doctor');
         }
         else{
-          res.render('./doctor/sch_apt', { title: 'Home', app : data });
+          res.render('./doctor/sch_apt', { title: 'Home',user: req.session.user, app : data, alert1: null });
         }
       });
     }
@@ -123,6 +124,65 @@ router.get('/doctor/pen_appointments', function (req, res, next) {
         }
       });
     }
+});
+
+router.post('/doctor/sch_appointments/presc', function(req, res, next) {
+  var pid = req.body.pid;
+  var did = req.body.did;
+  var presc = req.body.presc;
+  var disease = req.body.disease;
+  var bill = req.body.bill;
+  console.log(pid);
+    appoint.findById(req.query.aid,function(err,patient){
+      if(err)
+      {
+      console.log("Error! Wrong insertion in p_history !!");
+      res.redirect('./');
+      }
+      else
+      {
+        var data = {};
+        var date_now = new Date();
+        console.log(patient[0]);
+        data["_id"] = date_now/1000;
+        data["pid"] = patient[0]._id;
+        data["fname"] = patient[0].fname;
+        data["mname"] = patient[0].mname;
+        data["lname"] = patient[0].lname;
+        data["mob"] = patient[0].mob;
+        data["email"] = patient[0].email;
+        data["fadhaar"] = patient[0].fadhaar;
+        data["madhaar"] = patient[0].madhaar;
+        data["age"] = patient[0].age;
+        data["weight"] = patient[0].weight;
+        data["date"] = date_now;
+        data["doc_id"] = req.body.did;
+        data["disease"] = req.body.disease;
+        data["prescription"] = req.body.prescription;
+        data["bill"] = req.body.bill;
+        patient_history.insert(data,function(err){
+                if(err)
+                {
+                  console.log("Error inserting Patient History data !");
+                  res.send('Error inserting Patient History data !');
+                }
+                else{
+                  console.log("Patient History inserted.");
+                  appoint.donePatient(req.query.aid,'DONE',function (err, data){
+                      if(err){
+                            res.redirect('/doctor');
+                          }
+                          else{
+                            res.render('./doctor/sch_apt', { title: 'Home', app : data });
+                          }
+                        
+                      
+                  });
+                  res.redirect('/doctor/sch_appointments');
+                }
+        });
+      }
+    });
 });
 
 router.get('/doctor/accept', function (req, res, next) {
@@ -171,6 +231,6 @@ router.get('/patient/take_appointment', function(req, res, next) {
 });
 
 router.get('/patient/profile', function(req, res, next) {
-  res.render('./patient/profile', { title: 'Profile',user: req.session.user  });
+  res.render('./patient/profile', { title: 'Profile',user: req.session.user });
 });
 module.exports = router;
