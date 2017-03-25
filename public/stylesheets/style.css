@@ -1,5 +1,5 @@
 /********* Icons ************/
-.person_name,.phone,.course,.batch,.serial_no,.email,.lock,.unlock,.file,.id,.graduation,.go_back,.right-arrow,.fab_add,.fab_cross,.save,.download,.online,.offline,.sem,.desc,.problem_st,.numbers,.sample_in,.sample_out,.input_format,.output_format,.score,.passed,.failed,.not_allowed{
+.person_name,.phone,.course,.batch,.serial_no,.email,.lock,.unlock,.file,.id,.graduation,.go_back,.right-arrow,.fab_add,.fab_cross,.save,.download,.online,.offline,.sem,.desc,.problem_st,.numbers,.sample_in,.sample_out,.input_format,.output_format,.score,.passed,.failed,.not_allowed,.sch1{
 	background-size: 2rem 2rem;
     background-repeat: no-repeat;
 }
@@ -96,6 +96,9 @@
 .not_allowed{
 	background-image: url(../icons/not_allowed.png);
 }
+.sch1{
+	background-image: url(../images/sch1.png);
+}
 /************** Home page ******************/
 .full_screen{
 	background-image: url('../images/codebotbg32.jpg');
@@ -133,8 +136,11 @@
 .blue-black-light{
 	background-color: rgb(27,32,90) !important;
 }
+.green-black-my1{
+	background-color: #2f523a !important;
+}
 .blue-black-my1{
-    background-color:#2c3346 !important;
+    background-color: #2c3346 !important;
 }
 .blue-black-my1-text{
     color: #4e5c82 !important;
