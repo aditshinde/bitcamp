@@ -28,21 +28,21 @@ exports.find = function(callback){
 }
 
 exports.findById = function(data,callback){
-	Patient.find({_id : data},function(err,patient){
+	Patient.find({email : data},function(err,patient){
 		if(err){
 			console.log("Error:");
 			console.log(err);
 			callback(err,null);
 		}
 		else{
-			//console.log(patient);
+			console.log(patient);
 			callback(null,patient);
 		}
 	});
 }
 
 exports.findPass = function(data,callback){
-	Patient.find({_id : data},{_id:0,pass:1},function(err,patient){
+	Patient.find({email : data},{_id:0,pass:1},function(err,patient){
 		if(err){
 			console.log("Error:");
 			console.log(err);

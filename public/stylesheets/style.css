@@ -105,9 +105,9 @@
 	
 }
 .background-layer{
-	background-image: url('../images/cbb.png'); /*#273245*/
+	background-image: url('../images/bc3.jpg'); /*#273245*/
 	background-size: cover;
-
+	background-repeat: no-repeat;
 }
 #home_login{
 	background-color: rgba(0, 128, 0, 0);
@@ -138,6 +138,9 @@
 }
 .green-black-my1{
 	background-color: #2f523a !important;
+}
+.green-black-my1-text{
+	color: #2f523a !important;
 }
 .blue-black-my1{
     background-color: #2c3346 !important;
