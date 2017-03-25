@@ -109,6 +109,11 @@
               color: rgba(60, 107, 74, 0.79);
               background-color: #fbfdff;
             }
+            .pen_apt_details{
+                height: 30px;
+                display: inline-block;
+                margin: 1%;
+            }
         </style>
   </head>
   <body>
@@ -126,83 +131,35 @@
                     <a href="/doctor" class="collection-item blue-black-my1-text"><h6><b>Apt 2</b></h6></a>
               </div> -->
               <ul class="collapsible popout" data-collapsible="accordion">
+                <%for(var i=0;i<app.length;i++){%>
                 <li>
-                  <div class="collapsible-header scd_apt_title">  
-                    1. Sumeet Jadhav
+                  <div class="collapsible-header pen_apt_title">  
+                    <%=i+1%>. <%=app[i].fname%>&nbsp;<%=app[i].lname%>
                   </div>
                   <div class="collapsible-body" style="padding:2rem">
-                    <span class="scd_apt_details">
-                      Name : Sumeet Jadhav
+                    <span class="pen_apt_details center">
+                      <b>Name</b> </br><%=app[i].fname%>&nbsp;<%=app[i].mname%>&nbsp;<%=app[i].lname%>
                     </span>
-                    <span class="scd_apt_details">
-                      Mobile : 9004666678
+                    <span class="pen_apt_details center">
+                      <b>Mobile</b> </br><%=app[i].mobile%>
                     </span>
-                    <span class="scd_apt_details">
-                      Address : 102, M.G.Road, Nerul, Navi Mumbai
+                    <span class="pen_apt_details center">
+                      <b>Address</b> </br><%=app[i].address.street%>,<%=app[i].address.city%>,<%=app[i].address.state%>,<%=app[i].address.pin%>
                     </span>
-                    <span class="scd_apt_details">
-                      Date : 25-03-2017
+                    <span class="pen_apt_details center">
+                      <b>Date</b> </br><%=app[i].date%>
                     </span>
-                    <span class="scd_apt_details">
-                      Time : 12.30 PM
+                    <span class="pen_apt_details center">
+                      <b>Time</b> </br><%=app[i].time%>
                     </span>
-                    <span class="scd_apt_details">
-                      <a class="waves-effect waves-light btn">Done</a>
+                    <span class="pen_apt_details">
+                          <a href="#" class="waves-effect waves-light btn">Done</a>   
                     </span>
                   </div>
                 </li>
-                <li>
-                  <div class="collapsible-header scd_apt_title">  
-                    2. Ratnesh Dubey
-                  </div>
-                  <div class="collapsible-body" style="padding:2rem">
-                    <span class="scd_apt_details">
-                      Name : Ratnesh Dubey
-                    </span>
-                    <span class="scd_apt_details">
-                      Mobile : 9004666678
-                    </span>
-                    <span class="scd_apt_details">
-                      Address : 102, M.G.Road, Nerul, Navi Mumbai
-                    </span>
-                    <span class="scd_apt_details">
-                      Date : 25-03-2017
-                    </span>
-                    <span class="scd_apt_details">
-                      Time : 12.30 PM
-                    </span>
-                    <span class="scd_apt_details">
-                      <a class="waves-effect waves-light btn">Done</a>
-                    </span>
-                  </div>
-                </li>
-                <li>
-                  <div class="collapsible-header scd_apt_title">  
-                    3. John Diesel
-                  </div>
-                  <div class="collapsible-body" style="padding:2rem">
-                    <span class="scd_apt_details">
-                      Name : John Diesel
-                    </span>
-                    <span class="scd_apt_details">
-                      Mobile : 9004666678
-                    </span>
-                    <span class="scd_apt_details">
-                      Address : 102, M.G.Road, Nerul, Navi Mumbai
-                    </span>
-                    <span class="scd_apt_details">
-                      Date : 25-03-2017
-                    </span>
-                    <span class="scd_apt_details">
-                      Time : 12.30 PM
-                    </span>
-                    <span class="scd_apt_details">
-                      <a class="waves-effect waves-light btn">Done</a>
-                    </span>
-                  </div>
-                </li>
+                <%}%>
+                
               </ul>
-
             </div>
 
         </div>

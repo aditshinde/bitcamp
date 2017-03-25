@@ -5,12 +5,16 @@ var appointSchema  = mongoose.Schema({
 		_id     : String,
 		did  : String,
 		pid : String,
+		fname : String,
+		mname : String,
+		lname : String,
+		email : String,
+		mobile : String,
 		time : String,
-		data : String,
+		date : String,
 		address : Schema.Types.Mixed,
-		charge : Number,
 		status : String
-});
+},{ collection : 'appoint' });
 
-var Appoint    = mongoose.model('Appoint',appointSchema);
+var Appoint    = mongoose.model('appoint',appointSchema);
 module.exports = Appoint;

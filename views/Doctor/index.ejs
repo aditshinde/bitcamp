@@ -112,47 +112,62 @@
             .card-title{
               line-height: 30px !important;
             }
+            .card-img{
+              padding: 27px;
+              border-right: 1px solid rgba(0, 0, 0, 0.04);
+              background-color: rgba(0, 0, 0, 0.05);
+            }
         </style>
   </head>
   <body>
     	<% include header.html %>
 
+              <div class="row" style="margin:0px 290px;">
+                  <h5><i>Dashboard</i></h5>
+              </div>
+              <hr>
              <div style="margin:0px 290px;">
                 <div class="row">
-                  <div class="card horizontal col l3 m6 s12 green">
-                    <div class="valign-wrapper"><div class="card-image">
-                      <!-- <img src="../../images/sch1.png"> -->
-                      <i class="sch1 prefix" style="font-size: 2.8rem;background-size: 60px;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</i>
-                    </div>
-                    </div>
-                    <div class="card-stacked">
-                      <div class="card-content white-text">
-                        <span class="card-title">Scheduled Appointments</span>
+                  
+                  <div class="col l6 m6 s12">
+                  <a href="/doctor/sch_appointments" style="color:#545454">
+                    <div class="card horizontal yellow">
+                      <div class="card-image card-img">
+                        <i class="sch1 prefix" style="font-size: 2.8rem;background-size:45px;margin: 13px 0 0px;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</i>
+                      </div>
+                      <div class="card-stacked">
+                        <div class="card-content">
+                          <h5>Scheduled Appointments</h5>
+                        </div>
                       </div>
                     </div>
+                  </a>
                   </div>
-                  <div class="col l3 m6 s12">
-                      <a href="/doctor/sch_appointments">
-                      <div class="card yellow darken-3">
-                          <div class="card-content white-text">
-                            <span class="card-title">Scheduled Appointments</span>
-                          </div>
+                  <div class="col l6 m6 s12">
+                  <a href="/doctor/pen_appointments" style="color:#545454">
+                    <div class="card horizontal teal darken-1">
+                      <div class="card-image card-img">
+                        <i class="pen1 prefix" style="font-size: 2.8rem;background-size:45px;margin: 13px 0 0px;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</i>
                       </div>
-                      </a>
+                      <div class="card-stacked">
+                        <div class="card-content">
+                          <h5>Pending Appointments</h5>
+                        </div>
+                      </div>
+                    </div>
+                  </a>
                   </div>
-                  <div class="col l3 m6 s12">
+
+                  <!-- <div class="col l6 m6 s12">
                       <a href="/doctor/pen_appointments">
                       <div class="card green">
                           <div class="card-content white-text">
                             <span class="card-title">Pending appointments</span>
                           </div>
-                          
                       </div>
-                    </a>
-                  </div>
-            
-        </div>
-      </div>
+                      </a>
+                  </div> -->
+              </div>
 
   </body>
 <script>

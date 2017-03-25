@@ -112,7 +112,7 @@
         </style>
   </head>
   <body>
-    	<% include header.html %>
+      <% include header.html %>
 
       <div style="margin:0px 2% 0px 290px;">
             
@@ -125,94 +125,43 @@
               <div class="collection">
                     <a href="/doctor" class="collection-item blue-black-my1-text"><h6><b>Apt 2</b></h6></a>
               </div> -->
+              
               <ul class="collapsible popout" data-collapsible="accordion">
+                <%for(var i=0;i<app.length;i++){%>
                 <li>
                   <div class="collapsible-header pen_apt_title">  
-                    1. Sumeet Jadhav
+                    <%=i+1%>. <%=app[i].fname%>&nbsp;<%=app[i].lname%>
                   </div>
                   <div class="collapsible-body" style="padding:2rem">
-                    <span class="pen_apt_details">
-                      Name : Sumeet Jadhav
+                    <span class="pen_apt_details center">
+                      <b>Name</b> </br><%=app[i].fname%>&nbsp;<%=app[i].mname%>&nbsp;<%=app[i].lname%>
+                    </span>
+                    <span class="pen_apt_details center">
+                      <b>Mobile</b> </br><%=app[i].mobile%>
+                    </span>
+                    <span class="pen_apt_details center">
+                      <b>Address</b> </br><%=app[i].address.street%>,<%=app[i].address.city%>,<%=app[i].address.state%>,<%=app[i].address.pin%>
+                    </span>
+                    <span class="pen_apt_details center">
+                      <b>Date</b> </br><%=app[i].date%>
+                    </span>
+                    <span class="pen_apt_details center">
+                      <b>Time</b> </br><%=app[i].time%>
                     </span>
                     <span class="pen_apt_details">
-                      Mobile : 9004666678
-                    </span>
-                    <span class="pen_apt_details">
-                      Address : 102, M.G.Road, Nerul, Navi Mumbai
-                    </span>
-                    <span class="pen_apt_details">
-                      Date : 25-03-2017
-                    </span>
-                    <span class="pen_apt_details">
-                      Time : 12.30 PM
-                    </span>
-                    <span class="pen_apt_details">
-                          <a class="btn-floating btn-large waves-effect waves-light green"><i class="material-icons">done</i></a>
-                          <a class="btn-floating btn-large waves-effect waves-light red"><i class="material-icons">clear</i></a>        </span>
+                          <a href="/doctor/accept?id=<%=app[i]._id%>" class="btn-floating btn-large waves-effect waves-light green"><i class="material-icons">done</i></a>
+                          <a href="/doctor/reject?id=<%=app[i]._id%>" class="btn-floating btn-large waves-effect waves-light red"><i class="material-icons">clear</i></a>        </span>
                   </div>
                 </li>
-                <li>
-                  <div class="collapsible-header pen_apt_title">  
-                    2. Ratnesh Dubey
-                  </div>
-                  <div class="collapsible-body" style="padding:2rem">
-                    <span class="pen_apt_details">
-                      Name : Ratnesh Dubey
-                    </span>
-                    <span class="pen_apt_details">
-                      Mobile : 9004666678
-                    </span>
-                    <span class="pen_apt_details">
-                      Address : 102, M.G.Road, Nerul, Navi Mumbai
-                    </span>
-                    <span class="pen_apt_details">
-                      Date : 25-03-2017
-                    </span>
-                    <span class="pen_apt_details">
-                      Time : 12.30 PM
-                    </span>
-                    <span class="pen_apt_details">
-                     <a class="btn-floating btn-large waves-effect waves-light green"><i class="material-icons">done</i></a>
-                          <a class="btn-floating btn-large waves-effect waves-light red"><i class="material-icons">clear</i></a>
-                    </span>
-                  </div>
-                </li>
-                <li>
-                  <div class="collapsible-header pen_apt_title">  
-                    3. John Diesel
-                  </div>
-                  <div class="collapsible-body" style="padding:2rem">
-                    <span class="pen_apt_details">
-                      Name : John Diesel
-                    </span>
-                    <span class="pen_apt_details">
-                      Mobile : 9004666678
-                    </span>
-                    <span class="pen_apt_details">
-                      Address : 102, M.G.Road, Nerul, Navi Mumbai
-                    </span>
-                    <span class="pen_apt_details">
-                      Date : 25-03-2017
-                    </span>
-                    <span class="pen_apt_details">
-                      Time : 12.30 PM
-                    </span>
-                                   <span class="pen_apt_details">
-                          <a class="btn-floating btn-large waves-effect waves-light green"><i class="material-icons">done</i></a>
-                          <a class="btn-floating btn-large waves-effect waves-light red"><i class="material-icons">clear</i></a>
-                      </span>
-                  </div>
-                </li>
+                <%}%>
+                
               </ul>
 
             </div>
 
         </div>
   </body>
-
-  <script src="../javascripts/typed.js"></script>
 <script>
-  
   $(document).ready(function(){
     
   });

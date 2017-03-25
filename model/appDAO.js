@@ -41,6 +41,21 @@ exports.findById = function(data,callback){
 	});
 }
 
+exports.findByDid = function(data,flag,callback){
+	console.log(data);
+	Appoint.find({did : data,status:flag},function(err,appoint){
+		if(err){
+			console.log("Error:");
+			console.log(err);
+			callback(err,null);
+		}
+		else{
+			console.log(appoint);
+			callback(null,appoint);
+		}
+	});
+}
+
 exports.findPass = function(data,callback){
 	Appoint.find({email : data},{_id:0,pass:1},function(err,appoint){
 		if(err){
@@ -51,6 +66,32 @@ exports.findPass = function(data,callback){
 		else{
 			//console.log(appoint);
 			callback(null,appoint);
+		}
+	});
+}
+
+exports.acceptPatient = function(id,flag,callback){
+	Appoint.update({_id : id},{$set : {status:flag}},function(err,data){
+		if(err){
+			console.log(err);
+			callback(err,null);
+			}
+		else{
+			console.log('Accepted');
+			callback(null,data);
+		}
+	});
+}
+
+exports.rejectPatient = function(id,flag,callback){
+	Appoint.update({_id : id},{$set : {status:flag}},function(err,data){
+		if(err){
+			console.log(err);
+			callback(err,null);
+			}
+		else{
+			console.log('Rejected');
+			callback(null,data);
 		}
 	});
 }

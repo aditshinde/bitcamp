@@ -4,13 +4,19 @@ var db = require('../model/db');
 var emailjs       = require("emailjs");
 var doctor       = require('../model/docDAO');
 var patient       = require('../model/patDAO');
-var departmentDAO = require('../model/appDAO');
+var appoint = require('../model/appDAO');
 
+/**----------------------------------------------------------------------------------**/
 /* GET home page. */
 router.get('/', function(req, res, next) {
 res.render('index', { title: 'Home' , err : 0 });
 });
 
+//Logout session
+router.get('/logout', function (req, res, next) {
+  req.session.user = null;
+  res.redirect('./');
+});
 
 //Login doctor & patient
 router.post('/verify', function (req, res, next) {
@@ -75,15 +81,96 @@ router.get('/doctor', function(req, res, next) {
 res.render('./doctor/index', { title: 'Home' });
 });
 
+router.get('/doctor/profile', function(req, res, next) {
+  res.render('./doctor/profile', { title: 'Profile',user: req.session.user });
+});
+
 router.get('/doctor/sch_appointments', function(req, res, next) {
-res.render('./doctor/sch_apt', { title: 'Schedule' });
+  if(!req.session.user)
+    {
+      res.redirect('/doctor');
+
+    }
+    else
+    {
+      appoint.findByDid(req.session.user._id,'ACCEPTED',function (err,data){
+        if(err){
+          res.redirect('/doctor');
+        }
+        else{
+          res.render('./doctor/sch_apt', { title: 'Home', app : data });
+        }
+      });
+    }
+
+  //res.render('./doctor/sch_apt', { title: 'Schedule' });
 });
 
-router.get('/doctor/pen_appointments', function(req, res, next) {
-res.render('./doctor/pen_apt', { title: 'Pending' });
+router.get('/doctor/pen_appointments', function (req, res, next) {
+    if(!req.session.user)
+    {
+      res.redirect('/doctor');
+
+    }
+    else
+    {
+      appoint.findByDid(req.session.user._id,'PENDING',function (err,data){
+        if(err){
+          res.redirect('/doctor');
+        }
+        else{
+          res.render('./doctor/pen_apt', { title: 'Home', app : data });
+        }
+      });
+    }
 });
 
+router.get('/doctor/accept', function (req, res, next) {
+  appoint.acceptPatient(req.query.id,'ACCEPTED',function (err, data){
+    if(err){
+          res.redirect('/doctor');
+        }
+        else{
+          appoint.findByDid(req.session.user._id,'PENDING',function (err,data){
+                if(err){
+                  res.redirect('/doctor');
+                }
+                else{
+                  res.render('./doctor/pen_apt', { title: 'Home', app : data });
+                }
+          });
+        }
+  });
+});
+
+router.get('/doctor/reject', function (req, res, next) {
+  appoint.rejectPatient(req.query.id,'REJECTED',function (err, data){
+    if(err){
+          res.redirect('/doctor');
+        }
+        else{
+          appoint.findByDid(req.session.user._id,'PENDING',function (err,data){
+        if(err){
+          res.redirect('/doctor');
+        }
+        else{
+          res.render('./doctor/pen_apt', { title: 'Home', app : data });
+        }
+      });
+    }
+  });
+});
+
+/**----------------------------------------------------------------------------------**/
 router.get('/patient', function(req, res, next) {
-res.render('./patient/index', { title: 'Home' });
+  res.render('./patient/index', { title: 'Home' });
+});
+
+router.get('/patient/take_appointment', function(req, res, next) {
+  res.render('./patient/appointment', { title: 'Appointment' });
+});
+
+router.get('/patient/profile', function(req, res, next) {
+  res.render('./patient/profile', { title: 'Profile',user: req.session.user  });
 });
 module.exports = router;
