@@ -136,27 +136,27 @@
                     <div class="input-field col s12">
                                 <i class="material-icons prefix">textsms</i>
                                 <select name="batch1" id="batch1" multiple="true">
-                                  <option value="NA" disabled selected>Symptoms</option>                    
-                                  <option value="abdominalpain">abdominalpain</option>
-                                  <option value="appetiteloss">appetiteloss</option>
-                                  <option value="bodypain">bodypain</option>
-                                  <option value="cold">cold</option>
-                                  <option value="constipation">constipation</option>
-                                  <option value="cough">cough</option>
-                                  <option value="dysentery">dysentery</option>
-                                  <option value="fatigue">fatigue</option>
-                                  <option value="fever">fever</option>
-                                  <option value="headache">headache</option>
-                                  <option value="headache">highfever</option>
-                                  <option value="highfever">jointpain</option>
-                                  <option value="nasalsecretions">nasalsecretions</option>
-                                  <option value="nausea">nausea</option>
-                                  <option value="nightsweat">nightsweat</option>
-                                  <option value="rash">rash</option>
-                                  <option value="shivering">shivering</option>
-                                  <option value="vomiting">vomiting</option>
-                                  <option value="weakness">weakness</option>
-                                  <option value="weightloss">weightloss</option>
+                                  <option value="NA" disabled selected>Symptoms</option>
+                                 <option value="abdominalpain">Abdominal Pain</option>
+                                  <option value="appetiteloss">Appetite Loss</option>
+                                  <option value="bodypain">Body Pain</option>
+                                  <option value="cold">Cold</option>
+                                  <option value="constipation">Constipation</option>
+                                  <option value="cough">Cough</option>
+                                  <option value="dysentery">dDsentery</option>
+                                  <option value="fatigue">Fatigue</option>
+                                  <option value="fever">Fever</option>
+                                  <option value="headache">Headache</option>
+                                  <option value="headache">High Fever</option>
+                                  <option value="highfever">Joint Pain</option>
+                                  <option value="nasalsecretions">Nasal Secretions</option>
+                                  <option value="nausea">Nausea</option>
+                                  <option value="nightsweat">Night Sweats</option>
+                                  <option value="rash">Rashes</option>
+                                  <option value="shivering">Shivering</option>
+                                  <option value="vomiting">Vomiting</option>
+                                  <option value="weakness">Weakness</option>
+                                  <option value="weightloss">Weight Loss</option>
                                 </select>  
                           </div>
                   </div>
@@ -222,7 +222,132 @@
       selectMonths: true, // Creates a dropdown to control month
       selectYears: 15 // Creates a dropdown of 15 years to control year
     });
+    predictDisease();
   });
+
+
+  function predictDisease(){
+    //alert('hua');
+    var tb = ["cough", "fever", "fatigue", "appetiteloss", "nightsweat", "weightloss"];
+    var malaria = ["cold", "shivering", "fever", "headache", "vomiting", "fatigue"];
+    var dengue = ["highfever", "headache", "bodypain", "fatigue", "nausea", "vomiting", "rash"];
+    var typhoid = ["fever", "rash", "weakness", "constipation", "headache"];
+    var swine = ["fever", "cough", "fatigue", "headache", "nasalsecretion"];
+    var diar = ["abdominalpain", "dysentery", "nausea", "vomiting"];
+    var chiku = ["fever", "jointpain", "rash", "bodypain"];
+    var lepto = ["highfever", "shivering", "headache", "abdominalpain"];
+    var jaun = ["fatigue", "vomiting", "rash", "weightloss"];
+    var stmi = ["nausea", "vomiting", "headache", "fever", "abdominalpain"];
+
+    var tbP = 0;
+    var malP = 0;
+    var dengP = 0;
+    var tyhP = 0;
+    var swineP = 0;
+    var dairP = 0;
+    var chikuP = 0;
+    var leptoP = 0;
+    var jaunP = 0;
+    var stmiP = 0;
+
+    var count = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0];
+    var diseases = ["Tubeculosis", "Malaria", "Dengue", "Typhoid", "Swine Flu", "Diarreoah", "Chikungunya", "Leptospirosis", "Jaundice", "Stomach Ache"];
+    //var probab  = [0.12,0.54,0.35,0.32,0.23,0.28,0.18,0.13,0.23,0.21];
+    var probab  = [0.1,0.1,0.1,0.1,0.1,0.1,0.1,0.1,0.1,0.1];
+
+    var symptoms = ["fever", "cough", "fatigue"];
+    var sens = 3/21;
+    var specs = [0.1,0.1,0.1,0.1,0.1,0.1,0.1,0.1,0.1,0.1];
+
+    for (var i = 0; i < symptoms.length; i++) {
+        if (tb.includes(symptoms[i])) {
+            count[0]++;
+        }
+        if (malaria.includes(symptoms[i])) {
+            count[1]++;
+        }
+        if (dengue.includes(symptoms[i])) {
+            count[2]++;
+        }
+        if (typhoid.includes(symptoms[i])) {
+            count[3]++;
+        }
+        if (swine.includes(symptoms[i])) {
+            count[4]++;
+        }
+        if (diar.includes(symptoms[i])) {
+            count[5]++;
+        }
+        if (chiku.includes(symptoms[i])) {
+            count[6]++;
+        }
+        if (lepto.includes(symptoms[i])) {
+            count[7]++;
+        }
+        if (jaun.includes(symptoms[i])) {
+            count[8]++;
+        }
+        if (stmi.includes(symptoms[i])) {
+            count[9]++;
+        }
+    }
+
+    var rankP = [0,0,0,0,0,0,0,0,0,0];
+    var rankN = [0,0,0,0,0,0,0,0,0,0];
+    var diff  = [0,0,0,0,0,0,0,0,0,0];
+
+    for(var n=0;n<10;n++){
+      rankP[n] = (probab[n] * sens)/((probab[n] * sens)+(1-probab[n])*(1-specs[n]));
+      rankN[n] = (1-probab[n])*(1-specs[n])/((probab[n] * sens)+(1-probab[n])*(1-specs[n]));
+      diff[n]  = (rankP[n]-rankN[n]);
+      //alert(rankN);
+    }
+
+
+    for (var x = (count.length - 1); x >= 0; x--) {
+        //Number of passes
+        for (var j = (count.length - x); j > 0; j--) {
+            //Compare the adjacent positions
+            if (diff[j] > diff[j - 1]) {
+                //Swap the numbers
+                var tmp = count[j];
+                count[j] = count[j - 1];
+                count[j - 1] = tmp;
+
+                //Swap the numbers
+                var tmp2 = diseases[j];
+                diseases[j] = diseases[j - 1];
+                diseases[j - 1] = tmp2;
+
+                //Swap the numbers
+                var tmp3 = probab[j];
+                probab[j] = probab[j - 1];
+                probab[j - 1] = tmp3;
+
+                //Swap the numbers
+                var tmp4 = rankP[j];
+                rankP[j] = rankP[j - 1];
+                rankP[j - 1] = tmp4;
+
+                //Swap the numbers
+                var tmp5 = diff[j];
+                diff[j] = diff[j - 1];
+                diff[j - 1] = tmp5;
+            }
+            //alert(count+" "+diseases);
+        }
+    }
+
+    var list = diseases.slice(0, 5);
+    //alert(diff);
+    //alert(list);
+
+    
+
+    //alert(count+" "+diseases);
+    //alert(rankP);
+
+  }
 
 </script>
   </body>

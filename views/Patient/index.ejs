@@ -118,9 +118,7 @@
     	<% include header.html %>
 
              <div style="margin:0px 290px;">
-                <div class="row">
-                  <p><b>DEVICE STATISTICS</b></p>
-                </div>
+                <h3 class="blue-text darken-4">Health Statistics</h3>
                 <div class="row">
                   <div class="col l3 m6 s12">
                       <div class="card center-align">
@@ -135,7 +133,7 @@
                    <div class="col l3 m6 s12">
                       <div class="card center-align">
                         <div class="card-content green-text darken-4">
-                                <span class="card-title">Pulse rate</span>
+                                <span class="card-title">Current Pulse rate</span>
                                 <hr/>
                                 <h3 id="pulse_rate">0</h3>
                               </div>
@@ -144,7 +142,7 @@
                    <div class="col l3 m6 s12">
                       <div class="card center-align">
                         <div class="card-content green-text darken-4">
-                                <span class="card-title">No. of hours slept</span>
+                                <span class="card-title">No. of Hours slept</span>
                                 <hr/>
                                 <h3 id="hours_slept">5</h3>
                               </div>
@@ -153,17 +151,25 @@
                    <div class="col l3 m6 s12">
                       <div class="card center-align">
                         <div class="card-content green-text darken-4">
-                                <span class="card-title">Blood pressure</span>
+                                <span class="card-title">Current Blood pressure</span>
                                 <hr/>
                                 <h3 id="blood_pressure">0</h3>
                               </div>
                       </div>
                  </div>
                  
-                </div>                
+                </div>
+                <h3 class="blue-text darken-4">Analytics</h3>
+      <div class="col l8">
+        <canvas id="analytics" class="col l12" style="margin-left:"width="80%" height="20px"></canvas>
+      </div>                
       </div>
 
+      
+  
+
   </body>
+  <script src="../javascripts/Chart.min.js"></script>
 <script>
       function randomInt(){
         setInterval(function(){
@@ -174,5 +180,87 @@
         //randomInt();
       }
       randomInt();
+      createLineChart();
+
+      function createLineChart(){
+              var data = {
+              labels: ["January", "February", "March", "April", "May", "June", "July"],
+              datasets: [
+                  {
+                      label: "Blood Pressure",
+                      fill: false,
+                      lineTension: 0.1,
+                      backgroundColor: "rgb(255, 51, 51)",
+                      borderColor: "rgb(255, 51, 53)",
+                      borderCapStyle: 'butt',
+                      borderDash: [],
+                      borderDashOffset: 0.0,
+                      borderJoinStyle: 'miter',
+                      pointBorderColor: "rgb(255, 51, 51)",
+                      pointBackgroundColor: "#fff",
+                      pointBorderWidth: 1,
+                      pointHoverRadius: 5,
+                      pointHoverBackgroundColor: "rgb(255, 51, 51)",
+                      pointHoverBorderColor: "rgb(255, 51, 51)",
+                      pointHoverBorderWidth: 2,
+                      pointRadius: 1,
+                      pointHitRadius: 10,
+                      data: [112, 110, 113, 112, 113, 112, 113],
+                      spanGaps: false,
+                  },
+                  {
+                      label: "Pulse Rate",
+                      fill: false,
+                      lineTension: 0.1,
+                      backgroundColor: "rgba(75,192,192,0.4)",
+                      borderColor: "rgba(75,192,192,1)",
+                      borderCapStyle: 'butt',
+                      borderDash: [],
+                      borderDashOffset: 0.0,
+                      borderJoinStyle: 'miter',
+                      pointBorderColor: "rgba(75,192,192,1)",
+                      pointBackgroundColor: "#fff",
+                      pointBorderWidth: 1,
+                      pointHoverRadius: 5,
+                      pointHoverBackgroundColor: "rgba(75,192,192,1)",
+                      pointHoverBorderColor: "rgba(220,220,220,1)",
+                      pointHoverBorderWidth: 2,
+                      pointRadius: 1,
+                      pointHitRadius: 10,
+                      data: [70, 72, 70, 71, 71, 72, 72, 72],
+                      spanGaps: false,
+                  },
+                  {
+                      label: "Body Temperature",
+                      fill: false,
+                      lineTension: 0.1,
+                      backgroundColor: "rgb(127, 63, 191)",
+                      borderColor: "rgb(127, 63, 191)",
+                      borderCapStyle: 'butt',
+                      borderDash: [],
+                      borderDashOffset: 0.0,
+                      borderJoinStyle: 'miter',
+                      pointBorderColor: "rgb(127, 63, 191)",
+                      pointBackgroundColor: "#fff",
+                      pointBorderWidth: 1,
+                      pointHoverRadius: 5,
+                      pointHoverBackgroundColor: "rgb(127, 63, 191)",
+                      pointHoverBorderColor: "rgb(127, 63, 191)",
+                      pointHoverBorderWidth: 2,
+                      pointRadius: 1,
+                      pointHitRadius: 10,
+                      data: [97, 97, 97, 97, 97, 98, 97, 97],
+                      spanGaps: false,
+                  }
+              ]
+          };
+
+          var ctx = document.getElementById('analytics').getContext('2d');
+          var myChart = new Chart(ctx, {
+            type: 'line',
+            data: data
+          });
+        }
+
 </script>
 </html>
