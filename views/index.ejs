@@ -2,10 +2,36 @@
 <html>
 	<head>
 		<title>Bitcamp</title>
+		<% include materialize.html%>
 	</head>
-	<body>
+	<body class="background-layer">
 		<header>
-			<h2>Bitcamp</h2>
-		</header>
+    <div class="navbar-fixed">
+        <nav style="box-shadow: none;" class="green-black-my1">
+        
+    <div class="nav-wrapper container wd85">
+        
+        <a href="./" class="brand-logo">MedDoc</a>
+      <ul id="nav-mobile" class="right hide-on-med-and-down">
+          <li><a class="white-text" href="/">Home</a></li>
+        <li><a class="white-text" href="users">About</a></li>
+        <li><a class="white-text" href="contact">Contact</a></li>
+      </ul>
+    </div>
+        
+  </nav>
+    </div>        
+</header>
+
+	<div class="card col l3 m8 s10 right white" style="margin: 5%;" id="for_login">
+         	<% include login.html %>
+      </div>
+
+
+
+
+ 
+
+    </div>
 	</body>
 </html>

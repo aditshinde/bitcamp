@@ -1,0 +1,84 @@
+   <div class="row" style="margin-bottom: 0px;">
+      	<div class="col green-black-my1 s12 center-align">
+       		<span class="white-text"><h4>Login</h4></span>
+	      </div>
+	   </div>
+
+     <div class="row divider"></div>
+
+      <form method="post" action="/verify">
+         <div class="row">
+            <div class="col s12 left-align">
+                 <input name="user_type" type="radio" id="test1" />
+                <label for="test1">Admin</label>
+                <input name="user_type" type="radio" id="test2" />
+      <label for="test2">Doctor</label>
+      <input name="user_type" type="radio" id="test3"  checked/>
+      <label for="test3">Patient</label>
+            </div>
+         </div>
+         <div class="row divider"></div>
+
+      	<div class="row">
+      		<div class="input-field white-text col s12">
+      			<i class="material-icons prefix green-black-my1-text">email</i>
+      			<input id="uid" type="text" name="uid" class="validate blue-black-text blue-black-border" placeholder="johndoe@gmail.com" required>
+      			<label for="uid" class="blue-black-text">Email</label>
+      		</div>
+      	</div>
+      	<div class="row">
+      		<div class="input-field white-text col s12">
+      			<i class="material-icons prefix green-black-my1-text">lock</i>
+      			<input id="pass" type="password" name="pass" class="validate blue-black-text blue-black-border" placeholder="********" required>
+      			<label for="pass" class="blue-black-text">Password</label>
+      	     </div>
+      	</div>
+      	<div class="row">
+      		<div class="col l6 s6">
+      		<button class="waves-effect waves-light btn green-black-my1" type="submit" name="Lsubmit">Sign In</button>
+      	      </div>
+      		<div class="col l6 s6 right-align">
+      		<button class="waves-effect waves-light btn green-black-my1" type="reset" name="Lsubmit">Clear</button>
+      		</div>
+		</div>
+    <div class="row">
+          <div class="col l12 m12 s12">
+          <a id="frgot" class="blue-black-text right" href="#">Forgot Password</a>
+    </div>
+    <%
+      if(err == '1'){
+    %>
+    <script type="text/javascript">
+    Materialize.toast("Wrong Username/Password!", 3000, 'rounded');
+    </script>
+    <%
+      }        
+    %>
+      </form>
+<script type="text/javascript">
+  $("#frgot").click(function(){
+    if($(this).hasClass('disabled'))
+            return;
+    $(this).addClass('disabled');
+    $('#frgot').html('Resetting Password...');
+    var type = $('#user_type').prop('checked');
+    var id   = $("#uid").val();
+    if(id == '' && type==true){
+      Materialize.toast("Roll No Empty!", 3000, 'rounded');
+    }
+    else if(id == '' && type==false){
+      Materialize.toast("SRDN No Empty!", 3000, 'rounded');
+    }
+    else{
+      $.ajax({
+        type    : 'POST',
+        url     : '/forgot',
+        data    : {type : type, id : id},
+        success : function(response){
+          Materialize.toast(response, 3000, 'rounded');
+          $('#frgot').html('New Password Sent');
+        }
+      });
+    }
+  });
+</script>

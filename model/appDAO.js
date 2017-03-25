@@ -28,21 +28,21 @@ exports.find = function(callback){
 }
 
 exports.findById = function(data,callback){
-	Appoint.find({_id : data},function(err,appoint){
+	Appoint.find({email : data},function(err,appoint){
 		if(err){
 			console.log("Error:");
 			console.log(err);
 			callback(err,null);
 		}
 		else{
-			//console.log(appoint);
+			console.log(appoint);
 			callback(null,appoint);
 		}
 	});
 }
 
 exports.findPass = function(data,callback){
-	Appoint.find({_id : data},{_id:0,pass:1},function(err,appoint){
+	Appoint.find({email : data},{_id:0,pass:1},function(err,appoint){
 		if(err){
 			console.log("Error:");
 			console.log(err);

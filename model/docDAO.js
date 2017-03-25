@@ -28,28 +28,28 @@ exports.find = function(callback){
 }
 
 exports.findById = function(data,callback){
-	Doctor.find({_id : data},function(err,doctor){
+	Doctor.find({email : data},function(err,doctor){
 		if(err){
 			console.log("Error:");
 			console.log(err);
 			callback(err,null);
 		}
 		else{
-			//console.log(doctor);
+			console.log(doctor);
 			callback(null,doctor);
 		}
 	});
 }
 
 exports.findPass = function(data,callback){
-	Doctor.find({_id : data},{_id:0,pass:1},function(err,doctor){
+	Doctor.find({email : data},{_id:0,pass:1},function(err,doctor){
 		if(err){
 			console.log("Error:");
 			console.log(err);
 			callback(err,null);
 		}
 		else{
-			//console.log(doctor);
+			console.log(doctor);
 			callback(null,doctor);
 		}
 	});

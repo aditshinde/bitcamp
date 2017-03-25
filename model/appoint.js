@@ -12,5 +12,5 @@ var appointSchema  = mongoose.Schema({
 		status : String
 });
 
-var Appoint    = mongoose.model('Appoint',patientSchema);
+var Appoint    = mongoose.model('Appoint',appointSchema);
 module.exports = Appoint;
