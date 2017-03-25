@@ -131,15 +131,7 @@
                               </div>
                       </div>
                  </div>
-                   <div class="col l3 m6 s12">
-                      <div class="card center-align">
-                        <div class="card-content green-text darken-4">
-                                <span class="card-title">Heart Rate<br/></span>
-                                <hr/>
-                                <h3 id="heart_rate">0</h3>
-                              </div>
-                      </div>
-                 </div>
+                   
                    <div class="col l3 m6 s12">
                       <div class="card center-align">
                         <div class="card-content green-text darken-4">
@@ -154,7 +146,7 @@
                         <div class="card-content green-text darken-4">
                                 <span class="card-title">No. of hours slept</span>
                                 <hr/>
-                                <h3 id="hours_slept">0</h3>
+                                <h3 id="hours_slept">5</h3>
                               </div>
                       </div>
                  </div>
@@ -174,17 +166,13 @@
   </body>
 <script>
       function randomInt(){
-        
-        randomInt();
+        setInterval(function(){
+          $("#blood_pressure").html(Math.floor(Math.random() * (10)) + 110);
+          $("#body_temp").html(Math.floor(Math.random() * (1)) + 97+" F");
+          $("#pulse_rate").html(Math.floor(Math.random() * (10)) + 70);
+        },1000);
+        //randomInt();
       }
-      $(document).ready(function(){
-        while(true){
-          var min = 100;
-          var max = 50;
-          var ran = Math.random();
-          $("#blood_pressure").html(Math.floor(ran * (max - min)) + min);
-          sleep(10);
-        }
-      });
+      randomInt();
 </script>
 </html>
