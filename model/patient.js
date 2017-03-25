@@ -22,5 +22,5 @@ var patientSchema  = mongoose.Schema({
 		occupation : String
 });
 
-var Doctor    = mongoose.model('Patient',patientSchema);
+var Patient    = mongoose.model('Patient',patientSchema);
 module.exports = Patient;
