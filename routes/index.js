@@ -224,7 +224,17 @@ router.get('/doctor/accept', function (req, res, next) {
                   res.redirect('/doctor');
                 }
                 else{
-                  var twilio = require('twilio');
+                  sendSMS(req.session.user.fname,req.session.user.lname);
+                  res.render('./doctor/pen_apt', { title: 'Home', app : data });
+                }
+          });
+        }
+  });
+});
+
+function sendSMS(fname,lname){
+  console.log('sending sms...');
+  var twilio = require('twilio');
  
                   // Find your account sid and auth token in your Twilio account Console.
                   var client = twilio('AC633b1cda4b11ce6814b778251f817d44','17b8b974800bcd8d88551d40c2439474');
@@ -233,14 +243,10 @@ router.get('/doctor/accept', function (req, res, next) {
                   client.sendMessage({
                     to: '+919768652121',
                     from: '+12017304043',
-                    body: 'Your appointment has been accepted'
+                    body: 'Your appointment with DR.'+fname+' has been accepted'
                   });
-                  res.render('./doctor/pen_apt', { title: 'Home', app : data });
-                }
-          });
-        }
-  });
-});
+             console.log('sms sent');     
+}
 
 router.get('/doctor/reject', function (req, res, next) {
   appoint.rejectPatient(req.query.id,'REJECTED',function (err, data){

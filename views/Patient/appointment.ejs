@@ -224,10 +224,7 @@
   });
 
   var list;
-
-  function predictDisease(){
-    //alert('hua');
-    var tb = ["cough", "fever", "fatigue", "appetiteloss", "nightsweat", "weightloss"];
+  var tb = ["cough", "fever", "fatigue", "appetiteloss", "nightsweat", "weightloss"];
     var malaria = ["cold", "shivering", "fever", "headache", "vomiting", "fatigue"];
     var dengue = ["highfever", "headache", "bodypain", "fatigue", "nausea", "vomiting", "rash"];
     var typhoid = ["fever", "rash", "weakness", "constipation", "headache"];
@@ -237,6 +234,15 @@
     var lepto = ["highfever", "shivering", "headache", "abdominalpain"];
     var jaun = ["fatigue", "vomiting", "rash", "weightloss"];
     var stmi = ["nausea", "vomiting", "headache", "fever", "abdominalpain"];
+  var diseases = ["Tuberculosis", "Malaria", "Dengue", "Typhoid", "Swine Flu", "Diarreoah", "Chikungunya", "Leptospirosis", "Jaundice", "Stomach Ache"];
+  var rankP = [0,0,0,0,0,0,0,0,0,0];
+    var rankN = [0,0,0,0,0,0,0,0,0,0];
+    var diff  = [0,0,0,0,0,0,0,0,0,0];
+    var probab  = [0.12,0.54,0.35,0.32,0.23,0.28,0.18,0.13,0.23,0.21];
+
+  function predictDisease(){
+    //alert('hua');
+    
 
     var tbP = 0;
     var malP = 0;
@@ -250,8 +256,8 @@
     var stmiP = 0;
 
     var count = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0];
-    var diseases = ["Tuberculosis", "Malaria", "Dengue", "Typhoid", "Swine Flu", "Diarreoah", "Chikungunya", "Leptospirosis", "Jaundice", "Stomach Ache"];
-    var probab  = [0.12,0.54,0.35,0.32,0.23,0.28,0.18,0.13,0.23,0.21];
+    
+    
     //var probab  = [0.1,0.1,0.1,0.1,0.1,0.1,0.1,0.1,0.1,0.1];
 
     var symptoms = $('#symp').val();
@@ -292,9 +298,7 @@
         }
     }
 
-    var rankP = [0,0,0,0,0,0,0,0,0,0];
-    var rankN = [0,0,0,0,0,0,0,0,0,0];
-    var diff  = [0,0,0,0,0,0,0,0,0,0];
+    
 
     for(var n=0;n<10;n++){
       rankP[n] = (probab[n] * sens)/((probab[n] * sens)+(1-probab[n])*(1-specs[n]));
@@ -337,8 +341,27 @@
             //alert(count+" "+diseases);
         }
     }
-
     list = diseases.slice(0, 5);
+
+    for (var x = (count.length - 1); x >= 0; x--) {
+        //Number of passes
+        for (var j = (count.length - x); j > 0; j--) {
+            //Compare the adjacent positions
+            if (count[j] > count[j - 1]) {
+                //Swap the numbers
+                var tmp = count[j];
+                count[j] = count[j - 1];
+                count[j - 1] = tmp;
+
+                //Swap the numbers
+                var tmp2 = diseases[j];
+                diseases[j] = diseases[j - 1];
+                diseases[j - 1] = tmp2;
+              }
+        }
+    }
+    alert(count+" "+diseases);
+  
     //alert(diff);
     //alert(list);
 
@@ -352,7 +375,7 @@
       predictDisease();
       //alert(list);
 
-      if(list[0]=='Tuberculosis'){
+      if(diseases[0]=='Tuberculosis'){
         $.ajax({
           type: 'POST',
           url : '/doctor/getDoctor',
