@@ -54,3 +54,17 @@ exports.findPass = function(data,callback){
 		}
 	});
 }
+
+exports.findBySpcl = function(data,callback){
+	Doctor.find({spcl : data},function(err,doctor){
+		if(err){
+			console.log("Error:");
+			console.log(err);
+			callback(err,null);
+		}
+		else{
+			console.log(doctor);
+			callback(null,doctor);
+		}
+	});
+}

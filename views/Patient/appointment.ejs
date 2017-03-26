@@ -124,7 +124,7 @@
           <span class="grey-text darken-4 center"><h3>Take an Appointment</h3></span>
       </div>
   </div>
-    <form method="post" action="/admin/add_student/new_student">
+    <form method="post" action="/patient/request_appoint">
                   <!-- <div class="row">
                     <div class="input-field col s12">
                       <i class="material-icons prefix">textsms</i>
@@ -135,15 +135,15 @@
                   <div class="row">
                     <div class="input-field col s12">
                                 <i class="material-icons prefix">textsms</i>
-                                <select name="batch1" id="batch1" multiple="true">
+                                <select name="symp" id="symp" multiple="true">
                                   <option value="NA" disabled selected>Symptoms</option>
-                                 <option value="abdominalpain">Abdominal Pain</option>
+                                  <option value="abdominalpain">Abdominal Pain</option>
                                   <option value="appetiteloss">Appetite Loss</option>
                                   <option value="bodypain">Body Pain</option>
                                   <option value="cold">Cold</option>
                                   <option value="constipation">Constipation</option>
                                   <option value="cough">Cough</option>
-                                  <option value="dysentery">dDsentery</option>
+                                  <option value="dysentery">Dsentery</option>
                                   <option value="fatigue">Fatigue</option>
                                   <option value="fever">Fever</option>
                                   <option value="headache">Headache</option>
@@ -159,47 +159,45 @@
                                   <option value="weightloss">Weight Loss</option>
                                 </select>  
                           </div>
+
                   </div>
                   <div class="row">
-                    <div class="input-field col s12 departments">
+                    <div class="input-field col s8 departments">
                                 <i class="material-icons prefix">perm_identity</i>
-                                <select name="department" id="department">
+                                <select id="doc" name="doc">
                                   <option value="NA" disabled selected>Nearest Doctors</option>                    
-                                  <option value="John Nasal">John Nasal</option>
+                                  <!-- <option value="John Nasal">John Nasal</option>
                                   <option value="Raj Verma">Raj Verma</option>
-                                  <option value="Nitin Shah">Nitin Shah</option>
+                                  <option value="Nitin Shah">Nitin Shah</option> -->
                                 </select>
                     </div>
-                  </div>
-                  <div class="row">
-                    <div class="input-field col s12">
-                      <i class="material-icons prefix">attach_money</i>
-                      <input type="text" id="autocomplete-input" class="autocomplete">
-                      <label for="autocomplete-input">Price</label>
+                    <div class=" col s4">
+                            <a id ="searchDoc" href="#"class="waves-effect waves-light btn green-black-my1" >Search</a>
                     </div>
                   </div>
                   <div class="row">
                     <div class="input-field col s12">
                       <i class="material-icons prefix">query_builder</i>
-                      <input type="text" id="autocomplete-input" class="autocomplete">
-                      <label for="autocomplete-input">Working Hours</label>
+                      <p class="range-field">
+                        <input type="range" name="timeS" min="9" max="20"/>
+                      </p>
                     </div>
                   </div>
 
                   <div class="row">
                     <div class="input-field col s12">
                       <i class="material-icons prefix">today</i>
-                      <input type="date" id="datepicker1" class="datepicker">
+                      <input type="date" name="dateS" id="datepicker1" class="datepicker">
                       <label for="datepicker1">Pick a Date for Appointment</label>
                     </div>
                   </div>
 
                   <div class="row">
                     <div class="col s6 center-align">
-                      <button class="waves-effect waves-light btn blue-black darken-4" type="submit" name="add">Submit</button>
+                      <button class="waves-effect waves-light btn green-black-my1" type="submit" name="add">Submit</button>
                     </div>
                     <div class="col s6 center-align">
-                      <button class="waves-effect waves-light btn blue-black darken-4" type="reset" name="clear">Clear</button>
+                      <button class="waves-effect waves-light btn green-black-my1" type="reset" name="clear">Clear</button>
                     </div>
                   </div>
             </form>
@@ -222,9 +220,10 @@
       selectMonths: true, // Creates a dropdown to control month
       selectYears: 15 // Creates a dropdown of 15 years to control year
     });
-    predictDisease();
+    //predictDisease();
   });
 
+  var list;
 
   function predictDisease(){
     //alert('hua');
@@ -251,11 +250,12 @@
     var stmiP = 0;
 
     var count = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0];
-    var diseases = ["Tubeculosis", "Malaria", "Dengue", "Typhoid", "Swine Flu", "Diarreoah", "Chikungunya", "Leptospirosis", "Jaundice", "Stomach Ache"];
-    //var probab  = [0.12,0.54,0.35,0.32,0.23,0.28,0.18,0.13,0.23,0.21];
-    var probab  = [0.1,0.1,0.1,0.1,0.1,0.1,0.1,0.1,0.1,0.1];
+    var diseases = ["Tuberculosis", "Malaria", "Dengue", "Typhoid", "Swine Flu", "Diarreoah", "Chikungunya", "Leptospirosis", "Jaundice", "Stomach Ache"];
+    var probab  = [0.12,0.54,0.35,0.32,0.23,0.28,0.18,0.13,0.23,0.21];
+    //var probab  = [0.1,0.1,0.1,0.1,0.1,0.1,0.1,0.1,0.1,0.1];
 
-    var symptoms = ["fever", "cough", "fatigue"];
+    var symptoms = $('#symp').val();
+    //alert(symptoms);
     var sens = 3/21;
     var specs = [0.1,0.1,0.1,0.1,0.1,0.1,0.1,0.1,0.1,0.1];
 
@@ -338,16 +338,57 @@
         }
     }
 
-    var list = diseases.slice(0, 5);
+    list = diseases.slice(0, 5);
     //alert(diff);
     //alert(list);
-
-    
 
     //alert(count+" "+diseases);
     //alert(rankP);
 
   }
+
+  $('#searchDoc').click(function(){
+      //alert("HI");
+      predictDisease();
+      //alert(list);
+
+      if(list[0]=='Tuberculosis'){
+        $.ajax({
+          type: 'POST',
+          url : '/doctor/getDoctor',
+          data : {str : 'Pulmonologist'},
+          success : function(response){
+            var tmp = '';
+            for(var i=0;i<response.length;i++)
+            {
+              tmp += '<option value="'+response[i]._id+'">'+response[i].fname+" "+response[i].lname+'</option>';
+            }  
+            //alert(tmp);
+            $('#doc').html(tmp);
+            $('select').material_select();
+
+          }
+        });
+      }
+      else{
+        $.ajax({
+          type: 'POST',
+          url : '/doctor/getDoctor',
+          data : {str:'Physician'},
+          success : function(response){
+            var tmp = '';
+            for(var i=0;i<response.length;i++)
+            {
+              tmp += '<option value="'+response[i]._id+'">'+response[i].fname+" "+response[i].lname+'</option>';
+            }  
+            //alert(tmp);
+            $('#doc').html(tmp); 
+            $('select').material_select(); 
+          }
+        });
+      } 
+
+    });
 
 </script>
   </body>

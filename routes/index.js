@@ -82,6 +82,33 @@ router.get('/doctor', function(req, res, next) {
 res.render('./doctor/index', { title: 'Home'});
 });
 
+router.post('/doctor/getDoctor', function(req, res, next) {
+  console.log(req.body.str);
+  doctor.findBySpcl(req.body.str,function(err,data){
+    if(err){
+      res.redirect('/doctor');
+    }
+    else{
+      res.send(data);
+    }
+  });
+});
+
+router.get('/patient/history', function(req, res, next) {
+//console.log('user->'+req.session.user._id);
+patient_history.findById(req.session.user._id,function(err,patient){
+if(err)
+{
+console.log("Error! Wrong insertion in p_history !!");
+res.redirect('./');
+}
+console.log('history-> '+patient[0]);
+res.render('./patient/p_history', { title: 'History',history: patient });
+});
+});
+
+
+
 router.get('/doctor/profile', function(req, res, next) {
   res.render('./doctor/profile', { title: 'Profile',user: req.session.user });
 });
@@ -227,7 +254,31 @@ router.get('/patient', function(req, res, next) {
 });
 
 router.get('/patient/take_appointment', function(req, res, next) {
-  res.render('./patient/appointment', { title: 'Appointment' });
+  res.render('./patient/appointment', { title: 'Appointment' , status : "0"});
+});
+
+router.post('/patient/request_appoint',function(req,res,next){
+  var data = {};
+  data["_id"]= Date.now()/1000;
+                data["pid"] = req.session.user._id;
+                data["did"] = req.body.doc;
+                data["fname"] = req.session.user.fname;
+                data["mname"] = req.session.user.mname;
+                data["lname"] = req.session.user.lname;
+                data["email"] = req.session.user.email;
+                data["mobile"] = req.session.user.mobile;
+                data["address"] = req.session.user.address;
+                data["time"] = req.body.timeS;
+                data["date"] = req.body.dateS;
+                data["status"] = "PENDING";
+  appoint.insert(data,function (err,data){
+    if(err){
+      res.redirect('/patient');
+    }
+    else{
+      res.render('./patient/appointment', { title: 'Appointment' , status : "1" });
+    }
+  });
 });
 
 router.get('/patient/profile', function(req, res, next) {
