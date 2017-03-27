@@ -29,7 +29,7 @@ exports.find = function(callback){
 }
 
 exports.findById = function(data,callback){
-	PH.find({ _id : data},function(err,patient){
+	PH.find({ pid : data},function(err,patient){
 		if(err){
 			console.log("Error:");
 			console.log(err);

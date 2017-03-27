@@ -173,10 +173,35 @@
 <script>
       function randomInt(){
         setInterval(function(){
-          $("#blood_pressure").html(Math.floor(Math.random() * (10)) + 110);
-          $("#body_temp").html(Math.floor(Math.random() * (1)) + 97+" F");
-          $("#pulse_rate").html(Math.floor(Math.random() * (10)) + 70);
-        },1000);
+        //   $("#blood_pressure").html(Math.floor(Math.random() * (10)) + 110);
+        //   $("#body_temp").html(Math.floor(Math.random() * (1)) + 97+" F");
+        //   $("#pulse_rate").html(Math.floor(Math.random() * (10)) + 70);
+        // },1000);
+        var bp = Math.floor(Math.random() * (15)) + 110;
+          var bt = Math.floor(Math.random() * (5)) + 97+" F";
+          var pr = Math.floor(Math.random() * (15)) + 70;
+
+
+          $("#blood_pressure").html(bp);
+          if(bp>118){
+            var audio = new Audio('./audio/alert.wav');audio.play();
+            Materialize.toast('High Blood Pressure Alert!',5000);
+          }
+          if(bp<82){
+           var audio = new Audio('./audio/alert.wav');audio.play();
+          Materialize.toast('Low Blood Pressure Alert!',5000);
+         }
+         $("#body_temp").html(bt);
+         if(bt>99){
+           var audio = new Audio('./audio/alert.wav');audio.play();
+           Materialize.toast('High Body Temperature Alert!',5000);
+         }
+         $("#pulse_rate").html(pr);
+         if(pr>78){
+           var audio = new Audio('./audio/alert.wav');audio.play();
+           Materialize.toast('High Pulse Rate Alert!',5000);
+         }
+       },5000);
         //randomInt();
       }
       randomInt();

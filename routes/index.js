@@ -82,6 +82,10 @@ router.get('/doctor', function(req, res, next) {
 res.render('./doctor/index', { title: 'Home'});
 });
 
+router.get('/doctor/patient_history', function(req, res, next) {
+  res.render('./doctor/p_history', { title: 'History'});
+});
+
 router.post('/doctor/getDoctor', function(req, res, next) {
   console.log(req.body.str);
   doctor.findBySpcl(req.body.str,function(err,data){
@@ -92,6 +96,19 @@ router.post('/doctor/getDoctor', function(req, res, next) {
       res.send(data);
     }
   });
+});
+
+router.post('/show_p_his', function(req, res, next) {
+  patient_history.findById(req.body.no,function(err,patient){
+    if(err)
+    {
+      console.log("Error! Wrong retrive in p_history !!");
+      res.redirect('./');
+    }
+    console.log('history-> '+patient[0]);
+    res.send(patient);
+  });
+  
 });
 
 router.get('/patient/history', function(req, res, next) {
